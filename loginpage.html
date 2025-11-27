@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login Page</title>
+
   <style>
     body {
       margin: 0;
@@ -55,14 +56,25 @@
   </style>
 
   <script>
-    function validateForm(event) {
+    function validateForm() {
       const username = document.getElementById("username").value;
       const password = document.getElementById("password").value;
 
+      // Basic email check
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
       if (username === "" || password === "") {
         alert("Please fill in all fields.");
-        event.preventDefault(); // stops the link from opening
+        return;
       }
+
+      if (!emailPattern.test(username)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+
+      // If validation is correct → redirect
+      window.location.href = "homepage.html";
     }
   </script>
 </head>
@@ -71,13 +83,10 @@
   <div class="login-container">
     <h2>Login</h2>
 
-    <input type="text" id="username" placeholder="Username" />
+    <input type="text" id="username" placeholder="Enter Email" />
     <input type="password" id="password" placeholder="Password" />
 
-    <a href="homepage.html" onclick="validateForm(event)">
-      <button type="button">Login</button>
-    </a>
-
+    <button onclick="validateForm()">Login</button>
   </div>
 </body>
 </html>
